@@ -40,6 +40,7 @@ public class CuraHealth_Test {
         loginpage.enterTextUsr(USER_NAME);
         loginpage.enterTextPass(PASSWORD);
         loginpage.enterTextPass(PASSWORD);
+        System.out.println("sdfbhjsfbvsduhvadhubvj");
         loginpage.clickLoginbtn();
     }
 
