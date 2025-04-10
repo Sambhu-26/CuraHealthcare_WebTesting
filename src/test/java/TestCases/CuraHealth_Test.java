@@ -37,6 +37,7 @@ public class CuraHealth_Test {
     public void B_testLogin(){
         Cura_LoginPage loginpage=new Cura_LoginPage(driver);
         loginpage.enterTextUsr(USER_NAME);
+        loginpage.enterTextUsr(USER_NAME);
         loginpage.enterTextPass(PASSWORD);
         loginpage.clickLoginbtn();
     }
