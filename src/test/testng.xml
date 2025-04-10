@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+ <suite name="TestSuit">
+    <parameter name="UserName" value=""/>
+    <parameter name="Password" value=""></parameter>
+<test name="SmokeTest" parallel="classes">
+    <classes>
+        <class name="TestCases.TestNgTestsCases"/>
+            <class name="TestCases.TestNgTestsCases2"/>
+
+
+    </classes>
+</test>
+
+
+
+
+</suite>
