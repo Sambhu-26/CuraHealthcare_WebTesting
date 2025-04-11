@@ -22,6 +22,7 @@ public class Cura_dashboard {
     private By selectDate=By.id("txt_visit_date");
     private By BoxComments=By.name("comment");
     private By btnBookAppt=By.id("btn-book-appointment");
+    private By btnMakeAppt=By.linkText("Make Appointment");
 
     //Actions on elements
     public void selectFacility(){
@@ -42,8 +43,6 @@ public class Cura_dashboard {
 
     public void selectCalender(String days){
         driver.findElement(ChooseDate).sendKeys(days);
-//        driver.findElement(selectDate).sendKeys();
-
     }
 
     public void enterCommentsField(String comments){
@@ -52,6 +51,15 @@ public class Cura_dashboard {
 
     public void clickBookAppointment(){
         driver.findElement(btnBookAppt).click();
+    }
+
+
+    public void clickMakeAppt(){
+        driver.findElement(btnMakeAppt).click();
+    }
+    public void selectFacilityHongKong(){
+       Select hongKong= new Select(driver.findElement(dropdown));
+       hongKong.selectByVisibleText("Hongkong CURA Healthcare Center");
     }
 
 

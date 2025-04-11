@@ -6,9 +6,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.*;
+
+import java.util.concurrent.TimeUnit;
 
 import static CommonUtilities.Constants.PASSWORD;
 import static CommonUtilities.Constants.USER_NAME;
@@ -22,7 +25,8 @@ public class CuraHealth_Test {
     @BeforeTest
     public void LaunchBrowser(){
         driver=new ChromeDriver();
-        driver.navigate().to("https://katalon-demo-cura.herokuapp.com/profile.php#login");
+        driver.manage().window().maximize();
+        driver.navigate().to("https://katalon-demo-cura.herokuapp.com/");
 
     }
 
@@ -37,10 +41,7 @@ public class CuraHealth_Test {
     public void B_testLogin(){
         Cura_LoginPage loginpage=new Cura_LoginPage(driver);
         loginpage.enterTextUsr(USER_NAME);
-        loginpage.enterTextUsr(USER_NAME);
         loginpage.enterTextPass(PASSWORD);
-        loginpage.enterTextPass(PASSWORD);
-        System.out.println("sdfbhjsfbvsduhvadhubvj");
         loginpage.clickLoginbtn();
     }
 
@@ -51,17 +52,11 @@ public class CuraHealth_Test {
 //        System.out.println("Alert says: " + alert.getText());
 //        alert.accept();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-infobars");
-        options.addArguments("--disable-notifications");
-        options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
-            put("credentials_enable_service", false);
-            put("profile.password_manager_enabled", false);
-        }});
-
         cura_dashboard.selectFacility();
         cura_dashboard.selectChecbox();
         cura_dashboard.selectRadio();
         Thread.sleep(5000);
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         cura_dashboard.selectCalender("24/06/25");
         cura_dashboard.enterCommentsField("Provide Evidence – Logs, screenshots, and steps to reproduce.\n" +
                 "Reproduce the Bug with Them – Show the issue on their environment.");
@@ -83,6 +78,31 @@ public class CuraHealth_Test {
         cura_kebab.clickToggle();
         cura_kebab.clickHistory();
         cura_summarypage.performClick();
+    }
+
+    @Test
+    public void testF_SecondAppointment() throws InterruptedException {
+        Cura_dashboard cura_dashboard=new Cura_dashboard(driver);
+        Cura_Kebab cura_kebab=new Cura_Kebab(driver);
+        cura_dashboard.clickMakeAppt();
+        Thread.sleep(5000);
+        cura_dashboard.selectFacilityHongKong();
+        cura_dashboard.selectCalender("30/06/2025");
+        cura_dashboard.enterCommentsField("CURA Healthcare Service\n" +
+                "Atlanta 550 Pharr Road NE Suite 525\n" +
+                "Atlanta, GA 30305");
+        cura_dashboard.clickBookAppointment();
+        cura_kebab.clickToggle();
+        cura_kebab.clickHistory();
+        Thread.sleep(5000);
+    }
+
+    @AfterTest
+    public void LogOutBrowser(){
+        Cura_Kebab cura_kebab=new Cura_Kebab(driver);
+        cura_kebab.clickToggle();
+        cura_kebab.clickLogout();
+
     }
 
 

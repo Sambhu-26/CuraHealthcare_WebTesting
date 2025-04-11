@@ -19,7 +19,7 @@ public class Cura_HomePage {
     //performing Actions on them
     public void getTextValue(){
         String homeText=driver.findElement(txtCuraService).getText();
-        System.out.println("hoempage text"+ homeText);
+        System.out.println("hoempage text:"+ homeText);
 
     }
 
